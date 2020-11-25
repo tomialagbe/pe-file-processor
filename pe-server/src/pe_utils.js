@@ -36,7 +36,7 @@ function checkForPeSignature(fdOrFile, done) {
     })
 }
 
-const isPEFile = (filePath) => {
+const isPEFile = (filePath) => {    
     const fd = fs.openSync(filePath, 'r');
     return new Promise((resolve, reject) => {
         checkForPeSignature(fd, (err, isPEFile) => {
