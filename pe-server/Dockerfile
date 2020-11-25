@@ -10,4 +10,4 @@ ENV PORT=8080
 ENV REDIS_HOST=redis
 COPY . .
 EXPOSE 8080
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]
