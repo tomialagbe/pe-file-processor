@@ -10,13 +10,13 @@ services:
     networks:
       - app-tier
 
-  # server:
-  #   build: pe-server/
-  #   container_name: pe-server
-  #   ports:
-  #     - "8080:8080"
-  #   networks:
-  #     - app-tier
+  server:
+    build: pe-server/
+    container_name: pe-server
+    ports:
+      - "8080:8080"
+    networks:
+      - app-tier
 
 networks:
   app-tier:
