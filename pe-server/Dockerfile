@@ -1,0 +1,12 @@
+FROM node:12
+
+WORKDIR /usr/pe-processor/pe-server
+COPY package*.json ./
+
+RUN npm install
+ENV AWS_ACCESS_KEY=AKIAIOQQ4BWJIR7XLJMQ
+ENV AWS_SECRET_ACCESS_KEY=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
+ENV PORT=8080
+COPY . .
+EXPOSE 8080
+CMD ["node", "index.js"]
