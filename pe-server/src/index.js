@@ -48,7 +48,7 @@ app.post('/pe-file', (req, res) => {
                 return;
             }
 
-            let processResult = await processPeFile(req, fileRepo, uploader);
+            let processResult = await processPeFile(req.file.path, req.file.originalname, fileRepo, uploader);
             await unlinkAsync(req.file.path);
             res.status(processResult.statusCode).json(processResult.resp);
         } catch (err) {
