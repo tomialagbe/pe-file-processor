@@ -14,7 +14,6 @@ const { Uploader } = require('./uploader');
 const { FileRepo } = require('./file_repo');
 const { processPeFile } = require('./pe_file_service');
 
-
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -31,6 +30,11 @@ const s3 = new AWS.S3({
 });
 
 const redisClient = redis.createClient({ host: process.env.REDIS_HOST || 'localhost' });
+process.on('SIGINT', function() {
+    redisClient.quit();
+    console.log('redis client quit');
+});
+
 const fileRepo = new FileRepo(redisClient);
 const uploader = new Uploader(new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY,

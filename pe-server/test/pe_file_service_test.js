@@ -4,17 +4,13 @@ const sinon = require('sinon');
 const server = require('../src/index');
 const fs = require('fs');
 const assert = require('assert');
+const { FileRepo } = require('../src/file_repo');
+var redis = require('mock-redis-client').createMockRedis();
 
 chai.should();
 chai.use(chaiHttp);
 
-describe("just a silly test", function () {
-    it("checks a sum", function () {
-        assert.equal(2 + 1, 4);
-    });
-});
-
-describe('uploading to s3', () => {
-    
-    it('uploads to s3', () => { });
+describe('PE file service', () => {
+    let client = redis.createClient();
+    const fileRepo = FileRepo(client);
 });
