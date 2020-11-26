@@ -7,12 +7,12 @@ const getHashAndBuffer = (filePath) => {
     return { fileBuffer: fileBuffer, fileHash: fileHash };
 };
 
-const handleDuplicatePeFile = async (fileKey) => {
+const handleDuplicatePeFile = async (fileRepo, fileKey) => {
     const count = await fileRepo.updateDuplicateFileCount(fileKey);
     return { statusCode: 409, resp: { count: count } };
 };
 
-const savePeFileDetails = async (args) => {
+const savePeFileDetails = async (fileRepo, args) => {
     const { fileKey, newFileName, fileHash, originalFileName, fileBuffer, url } = args;
     const saved = await fileRepo.savePeFileDetails(fileKey, {
         fileName: newFileName,
@@ -30,12 +30,12 @@ const processPeFile = async (filePath, originalFileName, fileRepo, uploader) => 
     try {
         const exists = await fileRepo.peFileExists(fileKey);
         if (exists) {
-            return await handleDuplicatePeFile(fileKey);
+            return await handleDuplicatePeFile(fileRepo, fileKey);
         } else {
             const { url, newFileName, error } = await uploader.uploadFileToS3(filePath, fileBuffer);
             if (error) throw error;
 
-            return await savePeFileDetails({ fileKey, newFileName, fileHash, originalFileName, fileBuffer, url });
+            return await savePeFileDetails(fileRepo, { fileKey, newFileName, fileHash, originalFileName, fileBuffer, url });
         }
     } catch (e) {
         console.log(e);

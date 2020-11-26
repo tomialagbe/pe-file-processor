@@ -41,6 +41,9 @@ const uploader = new Uploader(new AWS.S3({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 }));
 
+console.log(`AWS ACCESS KEY: ${process.env.AWS_ACCESS_KEY}`);
+console.log(`AWS SECRET: ${process.env.AWS_SECRET_ACCESS_KEY}`);
+
 app.post('/pe-file', (req, res) => {
     let upload = multer({ storage: multerStorage, fileFilter: utils.peFileFilter }).single('peFile');
 
