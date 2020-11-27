@@ -3,6 +3,9 @@ This API accepts Portable-Executable (PE) files and saves them for future consum
 
 ## Running the project
 - Clone the repository
+- In pe-server/Dockerfile, update the environment variables
+- `AWS_ACCESS_KEY` and `AWS_SECRET_ACCESS_KEY` to your AWS access and secret keys.
+
 - Run this command from inside the pe-file-processor directory
 ````
 docker-compose up
